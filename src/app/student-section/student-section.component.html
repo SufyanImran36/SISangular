@@ -1,0 +1,171 @@
+<div class="container mx-auto my-auto">
+
+    <div class="card mt-4">
+        <div class="card-body">
+          <div class="row ">
+            <div class="col-md-3"><label>Search Student By Name:</label></div>
+            <div class="col-md-5"><div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for..." aria-label="Input group example" aria-describedby="basic-addon1" id="Stdntsearchbox1"><button id="Stdntsearchbtn1" (click)="getTD()" class="btn"><span class="input-group-text" id="searchicon1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" color="white" class="bi bi-search" viewBox="0 0 16 16">
+      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+    </svg>
+                  </span></button> 
+              </div>     
+            </div>
+            <div class="col-md-3"><p class="text-danger" [class.d-none]="NotFound1" id="Prntvalidmsg1">{{search1ErrMsg}}</p></div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-3"><label>Search Student by Parent Name:</label></div>
+            <div class="col-md-5"><div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for..." aria-label="Input group example" aria-describedby="basic-addon1" id="Stdntsearchbox2"><button id="Stdntsearchbtn2" class="btn"><span class="input-group-text" id="searchicon2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" color="white" class="bi bi-search" viewBox="0 0 16 16">
+      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+    </svg>
+                  </span></button> 
+              </div> 
+            </div>
+    <div class="col-md-3"><p id="Prntvalidmsg2"></p></div>
+        </div>
+
+          <div class="row table-responsive mx-auto my-auto mt-3 px-5">
+              <table data-toggle="table" class="table table-hover table-bordered sortable" id="student-data">
+                  <thead>
+                    <tr>
+                      <th (click)="changeicon1()" scope="col">Student ID <i   
+                        [ngClass]="status1 ? 'fas fa-sort-alpha-down' : 'fas fa-sort-alpha-up'" class="fas fa-sort-alpha-down"></i></th>
+                        <th (click)="changeicon2()" scope="col">Student Name <i   
+                          [ngClass]="status2 ? 'fas fa-sort-alpha-down' : 'fas fa-sort-alpha-up'" class="fas fa-sort-alpha-down"></i></th>
+                          <th (click)="changeicon3()" scope="col">Date of Birth <i   
+                            [ngClass]="status3 ? 'fas fa-sort-alpha-down' : 'fas fa-sort-alpha-up'" class="fas fa-sort-alpha-down"></i></th>
+                          <th (click)="changeicon4()" scope="col">Parent Name <i   
+                                [ngClass]="status4 ? 'fas fa-sort-alpha-down' : 'fas fa-sort-alpha-up'" class="fas fa-sort-alpha-down"></i></th>
+                            <th (click)="changeicon5()" scope="col">Address <i   
+                                    [ngClass]="status5 ? 'fas fa-sort-alpha-down' : 'fas fa-sort-alpha-up'" class="fas fa-sort-alpha-down"></i></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let TDS of TD">
+                      <td>{{TDS.StudentID}}</td>
+                      <td>{{TDS.StudentName}}</td>
+                      <td>{{TDS.DateofBirth}}</td>
+                      <td>{{TDS.ParentName}}</td>
+                      <td>{{TDS.Address}}</td>
+
+                    </tr>
+                    
+                  </tbody>
+                </table>
+          </div>
+
+
+          </div>
+      </div>
+
+
+
+      <hr />
+
+    <div class="card mt-3">
+      <div class="card-body">
+         <form #studentForm="ngForm" class="adminform" name="adminformm" (ngSubmit)="onSubmit(studentForm)"> <!--The Directive gives us the values of the form control and the reference variable gives us the reference of the directive-->
+          
+            {{studentForm.value| json}}
+            <hr/>
+            {{studentModel|json}}
+          
+         <div class="row">
+              <div class="col-md-3"><label class="form-label" for="Firstname">First Name</label></div>
+              <div class="col-md-5"><input #fname="ngModel" [class.is-invalid]="fname.invalid && fname.touched" class="form-control form-control-md" type="text" name="Firstname" placeholder="First Name" id="Fname" required [(ngModel)]=studentModel.fname /></div>
+              <div class="col-md-3"><small class="text-danger" [class.d-none]="fname.valid || fname.untouched">First Name is Required!</small></div>
+            </div>
+
+          <div class="row mt-4">
+              <div class="col-md-3"><label class="form-label" for="Middlename">Middle Name</label></div>
+              <div class="col-md-5"><input #mname="ngModel" [class.is-invalid]="mname.invalid && mname.touched" class="form-control form-control-md" type="text" name="Middlename" placeholder="Middle Name" id="Mname" required [(ngModel)]=studentModel.mname /></div>
+              <div class="col-md-3"><small class="text-danger" [class.d-none]="mname.valid || mname.untouched">Middle Name is Required!</small></div>
+            </div>
+
+          <div class="row mt-4">
+              <div class="col-md-3"><label class="form-label" for="Lastname">Last Name</label></div>
+              <div class="col-md-5"><input #lname="ngModel" [class.is-invalid]="lname.invalid && lname.touched" class="form-control form-control-md" type="text" name="Lastname" placeholder="Last Name" id="Lname" required [(ngModel)]=studentModel.lname /></div>
+              <div class="col-md-3"><small class="text-danger" [class.d-none]="lname.valid || lname.untouched">Last Name is Required!</small></div>
+            </div>
+
+          
+
+          <div class="row mt-4">
+              <div class="col-md-3"><label class="form-label" for="Address">Address</label></div>
+              <div class="col-md-5"><input #address="ngModel" [class.is-invalid]="address.invalid && address.touched" class="form-control form-control-md" type="text" name="Address" placeholder="Address" id="Address" required [(ngModel)]=studentModel.address /></div>
+              <div class="col-md-3"><small class="text-danger" [class.d-none]="address.valid || address.untouched">Address is Required!</small></div>
+            </div>
+
+          <div class="row mt-4">
+              <div class="col-md-3"><label class="form-label" for="City">City</label></div>
+              <div class="col-md-5"><input #city="ngModel" [class.is-invalid]="city.invalid && city.touched" class="form-control form-control-md" type="text" name="City" placeholder="City" id="City" required [(ngModel)]=studentModel.city /></div>
+              <div class="col-md-3"><small class="text-danger" [class.d-none]="city.valid || city.untouched">City is Required!</small></div>
+            </div>
+
+          <div class="row mt-4">
+              <div class="col-md-3"><label class="form-label" for="State">State</label></div>
+              <div class="col-md-5"><select (blur)="validateState(statess.value)" (change)="validateState(statess.value)"  #statess="ngModel" [class.is-invalid]="stateHasError && statess.touched" class="form-select" style="font-size:13px;" name="State" id="State" [(ngModel)]=studentModel.state>
+                <option  selected value="State">State</option>      
+                <option *ngFor="let state of states">{{ state }}</option>
+                
+                  </select>				
+                      </div>
+                 <div class="col-md-3"><small class="text-danger" [class.d-none]="!stateHasError || statess.untouched">Please choose a state</small></div>     
+            </div>
+
+          <div class="row mt-4">
+              <div class="col-md-3"><label class="form-label" for="Zip">Zip</label></div>
+              <div class="col-md-5"><input #zip="ngModel" [class.is-invalid]="zip.invalid && zip.touched" class="form-control form-control-md" type="text" name="Zip" placeholder="Zip" id="Zip" required [(ngModel)]=studentModel.zip /></div>
+              <div class="col-md-3"><small class="text-danger" [class.d-none]="zip.valid || zip.untouched">Zip is Required!</small></div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-3"><label class="form-label" for="Email">Email</label></div>
+                <div class="col-md-5"><input #email="ngModel" class="form-control form-control-md" type="email" name="Email" placeholder="Email" id="Email"required [(ngModel)]=studentModel.email /></div>
+                <div class="col-md-3"><small class="text-danger" [class.d-none]="email.valid || email.untouched">Email is Required!</small><div class="text-danger">{{emailErrorMsg}}</div> 
+            </div>
+            </div>
+        
+
+          <div class="row mt-4">
+              <div class="col-md-3"><label class="form-label" for="Phone1">Phone</label></div>
+              <div class="col-md-4"><input #pn1="ngModel" (blur)="validatePN1(pn1.value)" (change)="validatePN1(pn1.value)" [class.is-invalid]="pn1.invalid && pn1.touched && PN1HasError" class="form-control form-control-md" type="text" minlength="10" pattern="^[\+\d]?(?:[\d-.\s()]*)$" name="Phone1" placeholder="Phone" id="Phone1" required [(ngModel)]=studentModel.phone1 /></div>
+              <div class="col-md-4"><select class="form-select" style="font-size:13px;" #phone1type="ngModel" name="phonetype1" [(ngModel)]=studentModel.phone1type>
+                <option *ngFor="let phonetype of phonetypes">{{ phonetype }}</option>
+                </select></div>
+                <div class="col-md-3"><small class="text-danger" [class.d-none]="pn1.valid || pn1.untouched ||!PN1HasError">PHone No# {{PN1ErrorMsg}}</small></div>
+          </div>
+
+          <div class="row mt-4">
+              <div class="col-md-3"><label class="form-label" for="Phone2">Phone</label></div>
+              <div class="col-md-4"><input #pn2="ngModel" (blur)="validatePN2(pn2.value)" (change)="validatePN2(pn2.value)"  [class.is-invalid]="pn2.invalid && pn2.touched  && PN2HasError" class="form-control form-control-md" type="text" minlength="10" pattern="^[\+\d]?(?:[\d-.\s()]*)$" name="Phone2" placeholder="Phone" id="Phone2" required [(ngModel)]=studentModel.phone2 /></div>
+              <div class="col-md-4"><select class="form-select" style="font-size:13px;" #phone2type="ngModel" name="phonetype2" [(ngModel)]=studentModel.phone2type>    
+                <option *ngFor="let phonetype of phonetypes">{{ phonetype }}</option>
+                </select></div>
+                <div class="col-md-3"><small class="text-danger" [class.d-none]="pn1.valid || pn1.untouched ||!PN2HasError">PHone No# {{PN1ErrorMsg}}</small></div>
+          </div>
+
+          <div class="row mt-4">
+
+            <div class="col-md-3"><label class="form-label" for="specialNote">Special Note</label></div>
+            <div class="col-md-5"><textarea class="form-control" id="specialNote" name="specialNote" rows="3" placeholder="Special Note"  #SpecialNote="ngModel" [(ngModel)]=studentModel.specialNote></textarea></div>
+             
+          </div>
+
+          <footer>
+             <button type="reset" class="btn btn-success">Create New Student</button>
+             <button [disabled]="studentForm.form.invalid || stateHasError" type="submit" class="btn btn-primary">Save Student</button>
+          </footer>
+
+          
+
+
+   </form>
+      </div>
+    </div>
+  </div>
+

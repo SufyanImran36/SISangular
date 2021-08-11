@@ -1,0 +1,91 @@
+label{
+    color:#6a75a7;
+    font-size: 13px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+#parent-data{
+    
+    font-size: 13px;
+    
+
+}
+
+table thead{
+
+    background-color: #c5ccf567;
+
+}
+
+tbody tr:hover{
+    background-color: rgb(125, 141, 204) !important;
+    font-weight:bold;
+ }
+
+/* TABLE STYLES */
+th {
+    cursor: pointer;
+    
+}
+
+
+
+
+#searchicon1,#Prntsearchbtn1,#searchicon2,#Prntsearchbtn2{
+    background-color: #9ca4cc;
+    border:none;
+    
+}
+
+#searchicon1,#searchicon2{
+    height:20px;
+}
+
+#Prntsearchbtn1,#Prntsearchbtn2{
+    width:60px;
+    height:40px;
+}
+
+input{
+    height:40px;
+    color:#6a75a7;
+}
+
+input::-webkit-input-placeholder {
+    font-size: 13px;
+    line-height: 3;
+    color:#6a75a7;
+}
+
+input:-moz-placeholder{
+    font-size: 13px;
+    line-height: 3;
+    color:#6a75a7;
+
+}
+
+.btn-primary{
+   
+    padding-left: 30px;
+    padding-right: 30px;
+   
+}
+
+.btn-success{
+  
+    padding-left: 45px;
+    padding-right: 45px;
+}
+
+footer{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    
+}
+
+footer button{
+    margin-right: 10px;
+    margin-top: 50px;
+}
+
+ 

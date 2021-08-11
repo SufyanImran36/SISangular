@@ -1,0 +1,29 @@
+/* NAV BAR STYLING */
+#logo{
+    margin-right:50px;
+    color:white;
+}
+
+#tab{
+    margin-left: 20px;
+    /* background-color:rgb(15, 41, 73)  !important; */
+    color:white;
+    border-radius: 5px;
+    font-size:11px;
+    width:fit-content;
+    height: fit-content;
+}
+
+.navbar{
+    background-color:rgba(12,33,58,255)  !important;
+    
+}
+
+.disabled{
+    color:gray !important;
+}
+
+#tab.active{
+    
+    background-color:rgb(15, 41, 73);
+}
