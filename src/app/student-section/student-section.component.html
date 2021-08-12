@@ -16,17 +16,17 @@
         </div>
 
         <div class="row mt-4">
-            <div class="col-md-3"><label>Search Student by Parent Name:</label></div>
-            <div class="col-md-5"><div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for..." aria-label="Input group example" aria-describedby="basic-addon1" id="Stdntsearchbox2"><button id="Stdntsearchbtn2" class="btn"><span class="input-group-text" id="searchicon2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" color="white" class="bi bi-search" viewBox="0 0 16 16">
-      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
-    </svg>
-                  </span></button> 
-              </div> 
-            </div>
-    <div class="col-md-3"><p id="Prntvalidmsg2"></p></div>
-        </div>
+          <div class="col-md-3"><label>Search Parent by Student Name:</label></div>
+          <div class="col-md-5"><div class="input-group">
+              <input type="text" class="form-control" placeholder="Search for..." aria-label="Input group example" aria-describedby="basic-addon1" id="Prntsearchbox2"><button id="Prntsearchbtn2" class="btn"><span class="input-group-text" id="searchicon2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" color="white" class="bi bi-search" viewBox="0 0 16 16">
+                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+                </svg>
+                </span></button> 
+            </div> 
+          </div>
+  <div class="col-md-3"><p id="Prntvalidmsg2"></p></div>
+      </div>
 
           <div class="row table-responsive mx-auto my-auto mt-3 px-5">
               <table data-toggle="table" class="table table-hover table-bordered sortable" id="student-data">
@@ -124,30 +124,34 @@
             </div>
 
             <div class="row mt-4">
-                <div class="col-md-3"><label class="form-label" for="Email">Email</label></div>
-                <div class="col-md-5"><input #email="ngModel" class="form-control form-control-md" type="email" name="Email" placeholder="Email" id="Email"required [(ngModel)]=studentModel.email /></div>
-                <div class="col-md-3"><small class="text-danger" [class.d-none]="email.valid || email.untouched">Email is Required!</small><div class="text-danger">{{emailErrorMsg}}</div> 
-            </div>
-            </div>
+              <div class="col-md-3"><label class="form-label" for="Email">Email</label></div>
+              <div class="col-md-5"><input #email="ngModel" class="form-control form-control-md" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [class.is-invalid]="email.invalid && email.touched || !NotFound1" name="Email" placeholder="Email" id="Email" required [(ngModel)]=studentModel.email /></div>
+              <div class="col-md-3"><small class="text-danger" [class.d-none]="email.valid || email.untouched">Email is Required!</small><div class="text-danger">{{emailErrorMsg}}</div> 
+          </div>
+          </div>
         
 
-          <div class="row mt-4">
-              <div class="col-md-3"><label class="form-label" for="Phone1">Phone</label></div>
-              <div class="col-md-4"><input #pn1="ngModel" (blur)="validatePN1(pn1.value)" (change)="validatePN1(pn1.value)" [class.is-invalid]="pn1.invalid && pn1.touched && PN1HasError" class="form-control form-control-md" type="text" minlength="10" pattern="^[\+\d]?(?:[\d-.\s()]*)$" name="Phone1" placeholder="Phone" id="Phone1" required [(ngModel)]=studentModel.phone1 /></div>
-              <div class="col-md-4"><select class="form-select" style="font-size:13px;" #phone1type="ngModel" name="phonetype1" [(ngModel)]=studentModel.phone1type>
-                <option *ngFor="let phonetype of phonetypes">{{ phonetype }}</option>
-                </select></div>
-                <div class="col-md-3"><small class="text-danger" [class.d-none]="pn1.valid || pn1.untouched ||!PN1HasError">PHone No# {{PN1ErrorMsg}}</small></div>
-          </div>
+          <div class="row mt-4 ">
+            <div class="col-md-3"><label class="form-label" for="Phone1">Phone</label></div>
+            <div class="col-md-4"><input #pn1="ngModel" (blur)="validatePN1(pn1.value)" (change)="validatePN1(pn1.value)" [class.is-invalid]="pn1.invalid && pn1.touched && PN1HasError" class="form-control form-control-md" type="text" minlength="10" pattern="^[\+\d]?(?:[\d-.\s()]*)$" name="Phone1" placeholder="Phone" id="Phone1" required [(ngModel)]=studentModel.phone1 /></div>
+            <div class="col-md-3"><select required  class="form-select" [class.is-invalid]="phone1type.invalid && phone1type.touched" style="font-size:13px;" #phone1type="ngModel" name="phonetype1" [(ngModel)]=studentModel.phone1type>
+              <option selected value="Home">Home</option>
+              <option  value="Cell">Cell</option>
+              </select></div>
+              <div class="col-md-2"><small class="text-danger" [class.d-none]="phone1type.valid || phone1type.untouched">Please choose a type!</small></div>
+              <div class="col-md-3"><small class="text-danger" [class.d-none]="pn1.valid || pn1.untouched ||!PN1HasError">Phone No# {{PN1ErrorMsg}}</small></div>
+        </div>
 
           <div class="row mt-4">
-              <div class="col-md-3"><label class="form-label" for="Phone2">Phone</label></div>
-              <div class="col-md-4"><input #pn2="ngModel" (blur)="validatePN2(pn2.value)" (change)="validatePN2(pn2.value)"  [class.is-invalid]="pn2.invalid && pn2.touched  && PN2HasError" class="form-control form-control-md" type="text" minlength="10" pattern="^[\+\d]?(?:[\d-.\s()]*)$" name="Phone2" placeholder="Phone" id="Phone2" required [(ngModel)]=studentModel.phone2 /></div>
-              <div class="col-md-4"><select class="form-select" style="font-size:13px;" #phone2type="ngModel" name="phonetype2" [(ngModel)]=studentModel.phone2type>    
-                <option *ngFor="let phonetype of phonetypes">{{ phonetype }}</option>
-                </select></div>
-                <div class="col-md-3"><small class="text-danger" [class.d-none]="pn1.valid || pn1.untouched ||!PN2HasError">PHone No# {{PN1ErrorMsg}}</small></div>
-          </div>
+            <div class="col-md-3"><label class="form-label" for="Phone2">Phone</label></div>
+            <div class="col-md-4"><input #pn2="ngModel" (blur)="validatePN2(pn2.value)" (change)="validatePN2(pn2.value)"  [class.is-invalid]="pn2.invalid && pn2.touched  && PN2HasError" class="form-control form-control-md" type="text" minlength="10" pattern="^[\+\d]?(?:[\d-.\s()]*)$" name="Phone2" placeholder="Phone" id="Phone2" required [(ngModel)]=studentModel.phone2 /></div>
+            <div class="col-md-3"><select required class="form-select" [class.is-invalid]="phone2type.invalid && phone2type.touched" style="font-size:13px;" #phone2type="ngModel" name="phonetype2" [(ngModel)]=studentModel.phone2type>    
+              <option selected value="Home">Home</option>
+              <option  value="Cell">Cell</option>
+              </select></div>
+              <div class="col-md-2"><small class="text-danger" [class.d-none]="phone2type.valid || phone2type.untouched">Please choose a type!</small></div>
+              <div class="col-md-3"><small class="text-danger" [class.d-none]="pn2.valid || pn2.untouched ||!PN2HasError">Phone No# {{PN1ErrorMsg}}</small></div>
+        </div>
 
           <div class="row mt-4">
 

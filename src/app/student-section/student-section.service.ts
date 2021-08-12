@@ -12,7 +12,7 @@ export class StudentSectionService {
 
 
 
-  POSTURL=" "
+  POSTURL="http://localhost:3000/"
   GETURL=" "
 
   constructor(private _http: HttpClient) { }

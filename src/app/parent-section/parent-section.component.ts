@@ -4,12 +4,18 @@ import { NgForm } from '@angular/forms';
 import { ParentData } from '../parent-data';
 import { HttpClient } from '@angular/common/http';
 import { ParentSectionService } from './parent-section.service';
+import { state } from '@angular/animations';
+
+
+
 
 export class TableDataParent{
   constructor(
-    public parentName:string,
+    public fname:string,
+    public mname:string,
+    public lname:string,
     public address:string,
-    public phoneNumber:string
+    public phone1:string
   ){}
 }
 
@@ -24,6 +30,7 @@ export class TableDataParent{
 export class ParentSectionComponent implements OnInit {
 
  public TD:TableDataParent[] = []
+ 
   
 
   constructor(private _GetDataService:ParentSectionService,private _PostDataService:ParentSectionService,private httpClient:HttpClient) { }
@@ -35,17 +42,19 @@ export class ParentSectionComponent implements OnInit {
   }
   
   // This is the GET REQUEST
+  // This is the GET REQUEST
+
+ 
   search1ErrMsg=""
   NotFound1 = true;
   getError= 0;
   getTD(){
     this._GetDataService.GetRequest().subscribe(
       response=> this.TD = response,
-      error=> this.getError = error.status,
-     
-    )
-    
-    if(this.getError!=200)
+      error=> {this.getError = error.status;
+
+        
+        if(this.getError!=200)
         {
           this.search1ErrMsg="Record/s Not Found!"
           this.NotFound1=false;
@@ -54,9 +63,19 @@ export class ParentSectionComponent implements OnInit {
         else{
           this.NotFound1=true;
         }
+      
+      },
+
+      
+     
+    )
+
+
+    
   }
 
-  
+ 
+
 
 // List of all States
   states = [ "AK",
@@ -115,11 +134,8 @@ export class ParentSectionComponent implements OnInit {
   "WV",
   "WY"];
 
-  phonetypes=["Home","Cell"];
 
-
-
-  parentModel = new ParentData("","","","","","State","","","Home","","Home","","true");
+  parentModel = new ParentData("","","","","","State","","","Home","","Home","","false");
 
   stateHasError = true;
 
@@ -181,19 +197,32 @@ onSubmit(form:NgForm){
 
   this._PostDataService.PostReqest(this.parentModel).subscribe(
     data=>console.log("success!",data),
-    error=> this.errorStatus = error.status
+    error=> {this.errorStatus = error.status
+
+      if(this.errorStatus==409){
+        this.emailErrorMsg ="Email ID is Already Registered!";
+       
+        
+      }
+      else{
+        form.resetForm();
+        this.parentModel = new ParentData("","","","","","State","","","","","","","false");
+      
+      }
+    
+    
+    
+    }
     
   )
 
-  if(this.errorStatus!=200){
-    this.emailErrorMsg ="Email ID is Already Registered!";
-   
-    
-  }
-  else{
-    form.resetForm();
-  }
   
+  
+}
+
+onReset(form:NgForm){
+  form.resetForm();
+  this.parentModel = new ParentData("","","","","","State","","","","","","","");
 }
 
 status1: boolean = false;

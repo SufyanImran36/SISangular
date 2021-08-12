@@ -9,6 +9,7 @@ import { ParentSectionComponent } from './parent-section/parent-section.componen
 
 import { FormsModule } from '@angular/forms';
 import { StudentSectionComponent } from './student-section/student-section.component';
+import { SearchfilterPipe } from './searchfilter.pipe';
 
 
 
@@ -18,6 +19,7 @@ import { StudentSectionComponent } from './student-section/student-section.compo
     AppComponent,
     ParentSectionComponent,
     StudentSectionComponent,
+    SearchfilterPipe,
     // routingComponents ADD this to simplify list of all components, remove above component if your using this.
   ],
   imports: [

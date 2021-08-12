@@ -43,11 +43,9 @@ export class StudentSectionComponent implements OnInit {
   getTD(){
     this._GetDataService.GetRequest().subscribe(
       response=> this.TD = response,
-      error=> this.getError = error.status,
-     
-    )
-    
-    if(this.getError!=200)
+      error=> {this.getError = error.status
+
+        if(this.getError==409)
         {
           this.search1ErrMsg="Record/s Not Found!"
           this.NotFound1=false;
@@ -56,6 +54,18 @@ export class StudentSectionComponent implements OnInit {
         else{
           this.NotFound1=true;
         }
+
+
+
+
+      
+      
+      
+      }
+     
+    )
+    
+    
   }
 
   // List of all States
@@ -115,7 +125,7 @@ export class StudentSectionComponent implements OnInit {
   "WV",
   "WY"];
 
-  phonetypes=["Home","Cell"];
+  
 
 
 
@@ -181,19 +191,30 @@ onSubmit(form:NgForm){
 
   this._PostDataService.PostReqest(this.studentModel).subscribe(
     data=>console.log("success!",data),
-    error=> this.errorStatus = error.status
+    error=> {this.errorStatus = error.status
+
+      if(this.errorStatus!=200){
+        this.emailErrorMsg ="Email ID is Already Registered!";
+       
+        
+      }
+      else{
+        form.resetForm();
+        this.studentModel = new StudentData("","","","","","State","","","Home","","Home","","None");
+      }
+    
+    
+    }
     
   )
 
-  if(this.errorStatus!=200){
-    this.emailErrorMsg ="Email ID is Already Registered!";
-   
-    
-  }
-  else{
-    form.resetForm();
-  }
   
+  
+}
+
+onReset(form:NgForm){
+  form.resetForm();
+  this.studentModel = new StudentData("","","","","","State","","","","","","","None")
 }
 
 status1: boolean = false;

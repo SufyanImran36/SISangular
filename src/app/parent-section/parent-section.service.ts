@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { ParentData } from '../parent-data';
+import { ParentSectionComponent } from './parent-section.component';
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import { ParentData } from '../parent-data';
 })
 export class ParentSectionService {
 
-  POSTURL=" "
+  POSTURL="http://localhost:3000/"
   GETURL=" "
 
   constructor(private _http: HttpClient) { }
