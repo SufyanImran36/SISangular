@@ -9,7 +9,8 @@ import { ParentSectionComponent } from './parent-section/parent-section.componen
 
 import { FormsModule } from '@angular/forms';
 import { StudentSectionComponent } from './student-section/student-section.component';
-import { SearchfilterPipe } from './searchfilter.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 
@@ -19,14 +20,16 @@ import { SearchfilterPipe } from './searchfilter.pipe';
     AppComponent,
     ParentSectionComponent,
     StudentSectionComponent,
-    SearchfilterPipe,
+   
+    
     // routingComponents ADD this to simplify list of all components, remove above component if your using this.
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
     
   ],
   providers: [],

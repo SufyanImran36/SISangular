@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { ParentData } from '../parent-data';
 import { HttpClient } from '@angular/common/http';
 import { ParentSectionService } from './parent-section.service';
-import { state } from '@angular/animations';
+import {Sort} from '@angular/material/sort';
 
 
 
@@ -29,38 +29,50 @@ export class TableDataParent{
 
 export class ParentSectionComponent implements OnInit {
 
+  
+
+
  public TD:TableDataParent[] = []
+
+
+
+
+
+ 
+
+
  
   
 
   constructor(private _GetDataService:ParentSectionService,private _PostDataService:ParentSectionService,private httpClient:HttpClient) { }
 
-  
-
   ngOnInit(): void {
 
   }
+
+  
+ 
+
   
   // This is the GET REQUEST
   // This is the GET REQUEST
 
  
+  search1="";
   search1ErrMsg=""
   NotFound1 = true;
   getError= 0;
   getTD(){
-    this._GetDataService.GetRequest().subscribe(
+    this._GetDataService.GetRequest(this.search1==""?"12321312":this.search1).subscribe(
       response=> this.TD = response,
       error=> {this.getError = error.status;
 
-        
-        if(this.getError!=200)
+        if(this.TD==null)
         {
-          this.search1ErrMsg="Record/s Not Found!"
+          setTimeout(()=> this.search1ErrMsg="Record/s Not Found!",3000)
           this.NotFound1=false;
 
-        }
-        else{
+        }else{
           this.NotFound1=true;
         }
       
@@ -69,6 +81,8 @@ export class ParentSectionComponent implements OnInit {
       
      
     )
+
+     
 
 
     
@@ -200,11 +214,12 @@ onSubmit(form:NgForm){
     error=> {this.errorStatus = error.status
 
       if(this.errorStatus==409){
-        this.emailErrorMsg ="Email ID is Already Registered!";
+        setTimeout(()=>this.emailErrorMsg ="Email ID is Already Registered!",1000)
        
         
       }
       else{
+        
         form.resetForm();
         this.parentModel = new ParentData("","","","","","State","","","","","","","false");
       

@@ -23,8 +23,8 @@ export class ParentSectionService {
    return this._http.post<any>(this.POSTURL,parentdata)
   }
 
-  GetRequest(){
-    return this._http.get<any>(this.GETURL)
+  GetRequest(param:string){
+    return this._http.get<any>(this.GETURL+param)
   }
 
   

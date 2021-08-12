@@ -34,24 +34,26 @@ export class StudentSectionComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  
+
 
 
   // This is the GET REQUEST
+  search1=""
   search1ErrMsg=""
   NotFound1 = true;
   getError= 0;
   getTD(){
-    this._GetDataService.GetRequest().subscribe(
+    this._GetDataService.GetRequest(this.search1==""?"12332434509873":this.search1).subscribe(
       response=> this.TD = response,
       error=> {this.getError = error.status
 
-        if(this.getError==409)
+        if(this.TD==null)
         {
-          this.search1ErrMsg="Record/s Not Found!"
+          setTimeout(()=> this.search1ErrMsg="Record/s Not Found!",3000)
           this.NotFound1=false;
 
-        }
-        else{
+        } else{
           this.NotFound1=true;
         }
 
@@ -194,7 +196,7 @@ onSubmit(form:NgForm){
     error=> {this.errorStatus = error.status
 
       if(this.errorStatus!=200){
-        this.emailErrorMsg ="Email ID is Already Registered!";
+        setTimeout(()=>this.emailErrorMsg ="Email ID is Already Registered!",1000)
        
         
       }

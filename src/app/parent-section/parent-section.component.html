@@ -5,7 +5,7 @@
           <div class="row ">
             <div class="col-md-3"><label>Search Parent By Name:</label></div>
             <div class="col-md-5"><div class="input-group">
-                <input  type="text" class="form-control" placeholder="Search for..." aria-label="Input group example" aria-describedby="basic-addon1" id="Prntsearchbox1"><button id="Prntsearchbtn1" (click)="getTD()" class="btn"><span class="input-group-text" id="searchicon1">
+                <input  [(ngModel)]=search1 type="text" class="form-control" placeholder="Search for..." aria-label="Input group example" aria-describedby="basic-addon1" id="Prntsearchbox1"><button id="Prntsearchbtn1" (click)="getTD()" class="btn"><span class="input-group-text" id="searchicon1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" color="white" class="bi bi-search" viewBox="0 0 16 16">
       <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
     </svg>
@@ -29,16 +29,22 @@
         </div>
 
           <div class="row table-responsive mx-auto my-auto mt-3 px-5">
-              <table data-toggle="table" class="table table-hover table-bordered sortable" id="parent-data">
+               <table data-toggle="table" class="table table-hover table-bordered"  id="parent-data">
                   <thead>
                     <tr>
-                      <th (click)="changeicon1()" scope="col">Parent Name <i   
+                       <th (click)="changeicon1()" scope="col">Parent Name <i   
                         [ngClass]="status1 ? 'fas fa-sort-alpha-down' : 'fas fa-sort-alpha-up'" class="fas fa-sort-alpha-down"></i></th>
                         <th (click)="changeicon2()" scope="col">Address <i   
                           [ngClass]="status2 ? 'fas fa-sort-alpha-down' : 'fas fa-sort-alpha-up'" class="fas fa-sort-alpha-down"></i></th>
                           <th (click)="changeicon3()" scope="col">Phone Number <i   
-                            [ngClass]="status3 ? 'fas fa-sort-alpha-down' : 'fas fa-sort-alpha-up'" class="fas fa-sort-alpha-down"></i></th>
-                    </tr>
+                            [ngClass]="status3 ? 'fas fa-sort-alpha-down' : 'fas fa-sort-alpha-up'" class="fas fa-sort-alpha-down"></i></th> 
+                            
+
+                          
+                    
+                    
+                    
+                          </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let TDP of TD">
@@ -49,7 +55,14 @@
                     </tr>
                     
                   </tbody>
-                </table>
+                </table> 
+
+
+
+
+
+
+
           </div>
 
 

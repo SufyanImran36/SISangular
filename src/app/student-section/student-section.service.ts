@@ -24,8 +24,8 @@ export class StudentSectionService {
    return this._http.post<any>(this.POSTURL,studentdata)
   }
 
-  GetRequest(){
-    return this._http.get<any>(this.GETURL)
+  GetRequest(param:string){
+    return this._http.get<any>(this.GETURL+param)
   }
 
 }
