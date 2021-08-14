@@ -4,15 +4,18 @@ import { NgForm } from '@angular/forms';
 import { StudentData } from '../student-data';
 import { HttpClient } from '@angular/common/http';
 import { StudentSectionService } from './student-section.service';
+import { StudentEnrollment } from '../student-enrollment';
 
 export class TableDataStudent{
   constructor(
     
-    public StudentID:number,
-    public StudentName:string,
+    public id:number,
+    public fname:string,
+    public mname:string,
+    public lname:string,
     public DateofBirth:string,
-    public ParentName:string,
-    public Address:string
+    public parentname:string, //not sending right now
+    public address:string
 
 
 
@@ -48,27 +51,24 @@ export class StudentSectionComponent implements OnInit {
       response=> this.TD = response,
       error=> {this.getError = error.status
 
-        if(this.TD==null)
+        if(this.getError!=200)
         {
+          this.search1ErrMsg="Record/s Not Found!";
           setTimeout(()=> this.search1ErrMsg="Record/s Not Found!",3000)
           this.NotFound1=false;
 
         } else{
+          this.search1ErrMsg=""
           this.NotFound1=true;
         }
-
-
-
-
-      
       
       
       }
      
     )
     
-    
   }
+
 
   // List of all States
   states = [ "AK",
@@ -127,11 +127,52 @@ export class StudentSectionComponent implements OnInit {
   "WV",
   "WY"];
 
+  //Enrolement section dropdown
+  SundaySchoolsec=["1A","1B","2A","2B","3A","3B","4A","4B","5A","5B"];
+
+
+
+
+
+
+
+  ssHasError=true;
+  validatesundaySchool(value:string){
+
+    if(value=="Select" ||value==null)
+    {
+      this.ssHasError=true;
+
+    }
+    else{
+      this.ssHasError=false;
+    }
+
+
+
+  }
+  isOpenFee=false;
+
+  InputFeeValue(value:string){
+
+    if(value=="Standard Fee"){
+      this.isOpenFee=false;
+      
+    }
+    else{
+      this.isOpenFee=true;
+
+
+    }
+
+
+  }
+
   
 
 
 
-  studentModel = new StudentData("","","","","","State","","","Home","","Home","","None");
+  studentModel = new StudentData("","","","","","","State","","","Home","","Home","","None","","Select","Standard Fee","100","false");
 
   stateHasError = true;
 
@@ -192,17 +233,21 @@ emailErrorMsg =" "
 onSubmit(form:NgForm){
 
   this._PostDataService.PostReqest(this.studentModel).subscribe(
-    data=>console.log("success!",data),
+    data=>{console.log("success!",data),
+
+    form.resetForm()
+  },
     error=> {this.errorStatus = error.status
 
       if(this.errorStatus!=200){
+        this.emailErrorMsg ="Email ID is Already Registered!"
         setTimeout(()=>this.emailErrorMsg ="Email ID is Already Registered!",1000)
        
         
       }
       else{
         form.resetForm();
-        this.studentModel = new StudentData("","","","","","State","","","Home","","Home","","None");
+        this.studentModel = new StudentData("","","","","","","State","","","Home","","Home","","None","","Select","Standard Fee","100","false");
       }
     
     
@@ -216,7 +261,7 @@ onSubmit(form:NgForm){
 
 onReset(form:NgForm){
   form.resetForm();
-  this.studentModel = new StudentData("","","","","","State","","","","","","","None")
+  this.studentModel = new StudentData("","","","","","","State","","","","","","","None","","Select","Standard Fee","","");
 }
 
 status1: boolean = false;

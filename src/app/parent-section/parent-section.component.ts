@@ -67,12 +67,14 @@ export class ParentSectionComponent implements OnInit {
       response=> this.TD = response,
       error=> {this.getError = error.status;
 
-        if(this.TD==null)
+        if(this.getError!=200)
         {
+          this.search1ErrMsg="Record/s Not Found!";
           setTimeout(()=> this.search1ErrMsg="Record/s Not Found!",3000)
           this.NotFound1=false;
 
         }else{
+          this.search1ErrMsg="";
           this.NotFound1=true;
         }
       
@@ -210,15 +212,20 @@ emailErrorMsg =" "
 onSubmit(form:NgForm){
 
   this._PostDataService.PostReqest(this.parentModel).subscribe(
-    data=>console.log("success!",data),
+    data=>{console.log("success!",data),
+
+    form.resetForm()
+  },
     error=> {this.errorStatus = error.status
 
       if(this.errorStatus==409){
+        this.emailErrorMsg ="Email ID is Already Registered!"
         setTimeout(()=>this.emailErrorMsg ="Email ID is Already Registered!",1000)
        
         
       }
       else{
+        this.emailErrorMsg ="";
         
         form.resetForm();
         this.parentModel = new ParentData("","","","","","State","","","","","","","false");

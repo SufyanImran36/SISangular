@@ -13,7 +13,7 @@ export class ParentData {
         public phone1type:string,
         public phone2: string, 
         public phone2type:string,
-        public  email: string,
+        public email: string,
         public sms: string
     ){}
 }

@@ -17,7 +17,6 @@ export class ParentSectionService {
   constructor(private _http: HttpClient) { }
 
 
- 
 
   PostReqest(parentdata:ParentData){
    return this._http.post<any>(this.POSTURL,parentdata)
