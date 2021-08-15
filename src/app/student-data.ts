@@ -17,13 +17,7 @@ export class StudentData {
         public  email: string,
         public specialNote: string,
 
-        //ENROLEMENT DATA
-        public id:string,
-        public sundaySchool:string,
-        public tutionFeeType:string,
-        public tutionFee:string,
-        public paid:string
-        
+       
     ){}
 
 

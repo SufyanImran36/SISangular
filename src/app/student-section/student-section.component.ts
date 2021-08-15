@@ -139,7 +139,7 @@ export class StudentSectionComponent implements OnInit {
   ssHasError=true;
   validatesundaySchool(value:string){
 
-    if(value=="Select" ||value==null)
+    if(value=="Select" ||value==null || value=="")
     {
       this.ssHasError=true;
 
@@ -172,7 +172,9 @@ export class StudentSectionComponent implements OnInit {
 
 
 
-  studentModel = new StudentData("","","","","","","State","","","Home","","Home","","None","","Select","Standard Fee","100","false");
+  studentModel = new StudentData("","","","","","","State","","","Home","","Home","","None");
+  studentEnrollmentModel = new StudentEnrollment("","Select","Standard Fee","100","false")
+
 
   stateHasError = true;
 
@@ -233,9 +235,7 @@ emailErrorMsg =" "
 onSubmit(form:NgForm){
 
   this._PostDataService.PostReqest(this.studentModel).subscribe(
-    data=>{console.log("success!",data),
-
-    form.resetForm()
+    data=>{console.log("success!",data), form.resetForm()
   },
     error=> {this.errorStatus = error.status
 
@@ -247,7 +247,8 @@ onSubmit(form:NgForm){
       }
       else{
         form.resetForm();
-        this.studentModel = new StudentData("","","","","","","State","","","Home","","Home","","None","","Select","Standard Fee","100","false");
+        this.studentModel = new StudentData("","","","","","","State","","","Home","","Home","","None");
+        this.studentEnrollmentModel = new StudentEnrollment("","Select","","","false")
       }
     
     
@@ -261,7 +262,8 @@ onSubmit(form:NgForm){
 
 onReset(form:NgForm){
   form.resetForm();
-  this.studentModel = new StudentData("","","","","","","State","","","","","","","None","","Select","Standard Fee","","");
+  this.studentModel = new StudentData("","","","","","","State","","","","","","","None");
+  this.studentEnrollmentModel = new StudentEnrollment("","Select","","","")
 }
 
 status1: boolean = false;
