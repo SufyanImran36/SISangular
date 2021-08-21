@@ -32,11 +32,11 @@
                <table data-toggle="table" class="table table-hover table-bordered"  id="parent-data">
                   <thead>
                     <tr>
-                       <th (click)="changeicon1()" scope="col">Parent Name <i   
+                       <th (click)="sortname('fname')" (click)="changeicon1()" scope="col">Parent Name <i   
                         [ngClass]="status1 ? 'fas fa-sort-alpha-down' : 'fas fa-sort-alpha-up'" class="fas fa-sort-alpha-down"></i></th>
-                        <th (click)="changeicon2()" scope="col">Address <i   
+                        <th (click)="sortaddress('address')" (click)="changeicon2()" scope="col">Address <i   
                           [ngClass]="status2 ? 'fas fa-sort-alpha-down' : 'fas fa-sort-alpha-up'" class="fas fa-sort-alpha-down"></i></th>
-                          <th (click)="changeicon3()" scope="col">Phone Number <i   
+                          <th  (click)="sortnumber('phone1')" (click)="changeicon3()" scope="col">Phone Number <i   
                             [ngClass]="status3 ? 'fas fa-sort-alpha-down' : 'fas fa-sort-alpha-up'" class="fas fa-sort-alpha-down"></i></th> 
                             
 
@@ -47,11 +47,25 @@
                           </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let TDP of TD">
+                    <tr *ngFor="let TDP of TD | orderBy: key: reverse | orderBy: key2: reverse2 | orderBy: key3: reverse3 ">
                       <td>{{TDP.fname+" "+TDP.mname+" "+TDP.lname}}</td>
                       <td>{{TDP.address}}</td>
                       <td>{{TDP.phone1}}</td>
-
+                    </tr>
+                    <tr>
+                      <td>Aiden</td>
+                      <td>2</td>
+                      <td>3</td>
+                    </tr>
+                    <tr>
+                      <td>BOB</td>
+                      <td>3</td>
+                      <td>4</td>
+                    </tr>
+                    <tr>
+                      <td>Cat</td>
+                      <td>4</td>
+                      <td>5</td>
                     </tr>
                     
                   </tbody>

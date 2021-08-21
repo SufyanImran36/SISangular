@@ -4,7 +4,9 @@ import { NgForm } from '@angular/forms';
 import { ParentData } from '../parent-data';
 import { HttpClient } from '@angular/common/http';
 import { ParentSectionService } from './parent-section.service';
-import {Sort} from '@angular/material/sort';
+import { Ng2OrderModule } from 'ng2-order-pipe';
+
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -16,6 +18,7 @@ export class TableDataParent{
     public lname:string,
     public address:string,
     public phone1:string
+    
   ){}
 }
 
@@ -32,7 +35,68 @@ export class ParentSectionComponent implements OnInit {
   
 
 
- public TD:TableDataParent[] = []
+ public TD:TableDataParent[] = [
+
+  // {
+  //   "fname":"Aiden",
+  //   "mname":"cat",
+  //    "lname":"niga2.0",
+  //    "address":"a",
+  //    "phone1":"23423432"
+  // },
+  // {
+  //   "fname":"Aiden",
+  //   "mname":"sob",
+  //    "lname":"cello.0",
+  //    "address":"c",
+  //    "phone1":"66669999"
+  // },
+  // {
+  //   "fname":"Aiden",
+  //   "mname":"alan",
+  //    "lname":"cello.0",
+  //    "address":"d",
+  //    "phone1":"66669999"
+  // },
+  // {
+  //   "fname":"BOB",
+  //   "mname":"alan",
+  //    "lname":"cello.0",
+  //    "address":"b",
+  //    "phone1":"66669999"
+  // },
+  // {
+  //   "fname":"ziga",
+  //   "mname":"alan",
+  //    "lname":"cello.0",
+  //    "address":"e",
+  //    "phone1":"66669999"
+  // }
+
+ ]
+
+ key:string="fname"
+ reverse:boolean = false;
+ sortname(key:string){
+   this.key= key;
+   this.reverse = !this.reverse;
+ }
+
+
+
+ key2:string="address"
+ reverse2:boolean = false;
+sortaddress(key2:string){
+  this.key2= key2;
+  this.reverse2 = !this.reverse2;
+}
+
+key3:string="phone1"
+ reverse3:boolean = false;
+ sortnumber(key3:string){
+  this.key3= key3;
+  this.reverse3 = !this.reverse3;
+}
 
 
 
@@ -70,7 +134,7 @@ export class ParentSectionComponent implements OnInit {
         if(this.getError!=200)
         {
           this.search1ErrMsg="Record/s Not Found!";
-          setTimeout(()=> this.search1ErrMsg="Record/s Not Found!",3000)
+          setTimeout(()=> this.search1ErrMsg="",3000)
           this.NotFound1=false;
 
         }else{
@@ -220,7 +284,7 @@ onSubmit(form:NgForm){
 
       if(this.errorStatus==409){
         this.emailErrorMsg ="Email ID is Already Registered!"
-        setTimeout(()=>this.emailErrorMsg ="Email ID is Already Registered!",1000)
+        setTimeout(()=>this.emailErrorMsg ="",1000)
        
         
       }

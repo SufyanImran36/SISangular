@@ -39,9 +39,7 @@ export class StudentSectionComponent implements OnInit {
 
   
 
-
-
-  // This is the GET REQUEST
+  // This is the GET REQUEST to FILL TABLE
   search1=""
   search1ErrMsg=""
   NotFound1 = true;
@@ -54,7 +52,7 @@ export class StudentSectionComponent implements OnInit {
         if(this.getError!=200)
         {
           this.search1ErrMsg="Record/s Not Found!";
-          setTimeout(()=> this.search1ErrMsg="Record/s Not Found!",3000)
+          setTimeout(()=> this.search1ErrMsg="",3000)
           this.NotFound1=false;
 
         } else{
@@ -67,7 +65,19 @@ export class StudentSectionComponent implements OnInit {
      
     )
     
-  }
+  }// FILL TABLE FUNCTION ENDS HERE
+
+
+
+
+  
+
+
+//********************************************FIRST SECTION OF THE STUDENT FORM! -- PERSONAL INFORMATIOM********************************************
+  studentModel = new StudentData("","","","","","","State","","","Home","","Home","","None");
+
+
+  
 
 
   // List of all States
@@ -127,57 +137,7 @@ export class StudentSectionComponent implements OnInit {
   "WV",
   "WY"];
 
-  //Enrolement section dropdown
-  SundaySchoolsec=["1A","1B","2A","2B","3A","3B","4A","4B","5A","5B"];
-
-
-
-
-
-
-
-  ssHasError=true;
-  validatesundaySchool(value:string){
-
-    if(value=="Select" ||value==null || value=="")
-    {
-      this.ssHasError=true;
-
-    }
-    else{
-      this.ssHasError=false;
-    }
-
-
-
-  }
-  isOpenFee=false;
-
-  InputFeeValue(value:string){
-
-    if(value=="Standard Fee"){
-      this.isOpenFee=false;
-      
-    }
-    else{
-      this.isOpenFee=true;
-
-
-    }
-
-
-  }
-
-  
-
-
-
-  studentModel = new StudentData("","","","","","","State","","","Home","","Home","","None");
-  studentEnrollmentModel = new StudentEnrollment("","Select","Standard Fee","100","false")
-
-
-  stateHasError = true;
-
+stateHasError = true; //BOOL CHECK!
   validateState(value: string){
     if(value==='State' || value==null){
       this.stateHasError= true;
@@ -186,7 +146,7 @@ export class StudentSectionComponent implements OnInit {
     this.stateHasError= false;
   }
 
-}
+}//ENDS validate STATE dropdown -- VALIDATION CHECKS!
 
 PN1ErrorMsg=" "
 PN1HasError=true;
@@ -205,7 +165,7 @@ validatePN1(value:string){
     this.PN1HasError=false;
 
   }
-}
+}//ENDS validate Phone number 1 -- VALIDATION CHECKS!
 
 PN2ErrorMsg=" "
 PN2HasError=true;
@@ -224,48 +184,11 @@ validatePN2(value:string){
     this.PN2HasError=false;
 
   }
-}
+}//ENDS validate Phone number 2 -- VALIDATION CHECKS!
 
 
 
-
-errorStatus = 0;
-emailErrorMsg =" "
-
-onSubmit(form:NgForm){
-
-  this._PostDataService.PostReqest(this.studentModel).subscribe(
-    data=>{console.log("success!",data), form.resetForm()
-  },
-    error=> {this.errorStatus = error.status
-
-      if(this.errorStatus!=200){
-        this.emailErrorMsg ="Email ID is Already Registered!"
-        setTimeout(()=>this.emailErrorMsg ="Email ID is Already Registered!",1000)
-       
-        
-      }
-      else{
-        form.resetForm();
-        this.studentModel = new StudentData("","","","","","","State","","","Home","","Home","","None");
-        this.studentEnrollmentModel = new StudentEnrollment("","Select","","","false")
-      }
-    
-    
-    }
-    
-  )
-
-  
-  
-}
-
-onReset(form:NgForm){
-  form.resetForm();
-  this.studentModel = new StudentData("","","","","","","State","","","","","","","None");
-  this.studentEnrollmentModel = new StudentEnrollment("","Select","","","")
-}
-
+// FUNCTION THAT ALLOWS TOGGLING OF ICONS TO SORT TABLE!
 status1: boolean = false;
 changeicon1(){
     this.status1 = !this.status1;       
@@ -290,6 +213,105 @@ status5: boolean = false;
 changeicon5(){
     this.status5 = !this.status5;       
 }
+// END OF FUNCTION -- FUNCTION THAT ALLOWS TOGGLING OF ICONS TO SORT TABLE!
 
+//********************************************END********************************************
+
+
+
+
+
+//********************************************ENROLLMENT SECTION OF THE STUDENT FORM! -- ENROLL STATUS INFO********************************************
+studentEnrollmentModel = new StudentEnrollment("","Select","Standard Fee","100","false")
+  
+
+//Enrolement section dropdown
+SundaySchoolsec=["1A","1B","2A","2B","3A","3B","4A","4B","5A","5B"];
+
+
+
+ssHasError=true;
+validatesundaySchool(value:string){
+
+  if(value=="Select" ||value==null || value=="")
+  {
+    this.ssHasError=true;
+
+  }
+  else{
+    this.ssHasError=false;
+  }
+
+
+
+}// ENDS VLAIDAITON OF SUNDAYSCHOOL DROPDOWN
+
+isOpenFee=false; //WHEN SET TRUE -- it ENABLES CUSTOM INPUT OF FEE
+InputFeeValue(value:string){
+
+  if(value=="Standard Fee"){
+    this.isOpenFee=false;
+    
+  }
+  else{
+    this.isOpenFee=true;
+
+
+  }
+
+
+}// ENDS FEEE TYPE VALIDATION
+
+
+//********************************************END********************************************
+
+
+
+
+
+
+//********************************************FORM SUBMIT / RESET********************************************
+errorStatus = 0;
+emailErrorMsg =" "
+onSubmit(form:NgForm){
+
+
+  this._PostDataService.PostRequestEnrollmentInfo(this.studentEnrollmentModel).subscribe(
+    data=>{console.log("succeess!",data)},
+    error=>{window.alert(error.status+"Cannot POST Enrollment DATA!")}
+  )
+
+  this._PostDataService.PostReqestPersonalInfo(this.studentModel).subscribe(
+    data=>{console.log("success!",data),form.resetForm()},
+    error=> {this.errorStatus = error.status
+
+      if(this.errorStatus!=200){
+        this.emailErrorMsg ="Email ID is Already Registered!"
+        setTimeout(()=>this.emailErrorMsg ="",1000)
+       
+        
+      }
+      else{
+        form.resetForm();
+        this.studentModel = new StudentData("","","","","","","State","","","Home","","Home","","None");
+        this.studentEnrollmentModel = new StudentEnrollment("","Select","","","false")
+      }
+    
+    
+    }
+    
+  )
+
+  
+
+  
+  
+}//ENDS onSubmit FUNCTION
+
+onReset(form:NgForm){
+  form.resetForm();
+  this.studentModel = new StudentData("","","","","","","State","","","","","","","None");
+  this.studentEnrollmentModel = new StudentEnrollment("","Select","","","")
+}//END onReset FUNCITON --Resets the whole form when 'Create New Student is Clicked'
 
 }

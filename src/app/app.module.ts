@@ -11,6 +11,13 @@ import { FormsModule } from '@angular/forms';
 import { StudentSectionComponent } from './student-section/student-section.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { Ng2OrderModule } from 'ng2-order-pipe';
+
+import { NgxPaginationModule } from 'ngx-pagination';
+
+
+
+
 
 
 
@@ -29,8 +36,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    BrowserAnimationsModule
-    
+    BrowserAnimationsModule,
+    Ng2OrderModule,
+    NgxPaginationModule   
   ],
   providers: [],
   bootstrap: [AppComponent]
