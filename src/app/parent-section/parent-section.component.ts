@@ -215,7 +215,7 @@ key3:string="phone1"
   "WY"];
 
 
-  parentModel = new ParentData("","","","","","State","","","Home","","Home","","false");
+  parentModel = new ParentData("","","","","","","State","","","1","","1","","false");
 
   stateHasError = true;
 
@@ -292,7 +292,7 @@ onSubmit(form:NgForm){
         this.emailErrorMsg ="";
         
         form.resetForm();
-        this.parentModel = new ParentData("","","","","","State","","","","","","","false");
+        this.parentModel = new ParentData("","","","","","","State","","","","","","","false");
       
       }
     
@@ -308,7 +308,7 @@ onSubmit(form:NgForm){
 
 onReset(form:NgForm){
   form.resetForm();
-  this.parentModel = new ParentData("","","","","","State","","","","","","","");
+  this.parentModel = new ParentData("","","","","","","State","","","","","","","");
 }
 
 status1: boolean = false;

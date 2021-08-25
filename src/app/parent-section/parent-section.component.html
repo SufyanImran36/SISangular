@@ -91,9 +91,9 @@
       <div class="card-body">
          <form #parentForm="ngForm" class="adminform" name="adminformm" (ngSubmit)="onSubmit(parentForm)"> <!--The Directive gives us the values of the form control and the reference variable gives us the reference of the directive-->
           
-            {{parentForm.value| json}}
+            <!-- {{parentForm.value| json}}
             <hr/>
-            {{parentModel|json}}
+            {{parentModel|json}} -->
           
          <div class="row">
               <div class="col-md-3"><label class="form-label" for="Firstname">First Name</label></div>
@@ -116,9 +116,15 @@
           
 
           <div class="row mt-4">
-              <div class="col-md-3"><label class="form-label" for="Address">Address</label></div>
-              <div class="col-md-5"><input #address="ngModel" [class.is-invalid]="address.invalid && address.touched" class="form-control form-control-md" type="text" name="Address" placeholder="Address" id="Address" required [(ngModel)]=parentModel.address /></div>
-              <div class="col-md-3"><small class="text-danger" [class.d-none]="address.valid || address.untouched">Address is Required!</small></div>
+              <div class="col-md-3"><label class="form-label" for="Streetname">Street Name</label></div>
+              <div class="col-md-5"><input #streetname="ngModel" [class.is-invalid]="streetname.invalid && streetname.touched" class="form-control form-control-md" type="text" name="streetname" placeholder="Street Name" id="streetname" required [(ngModel)]=parentModel.street_name /></div>
+              <div class="col-md-3"><small class="text-danger" [class.d-none]="streetname.valid || streetname.untouched">Street Name is Required!</small></div>
+            </div>
+
+            <div class="row mt-4">
+              <div class="col-md-3"><label class="form-label" for="Apartment">Apartment</label></div>
+              <div class="col-md-5"><input #app="ngModel" [class.is-invalid]="app.invalid && app.touched" class="form-control form-control-md" type="text" name="Apartment" placeholder="Apartment" id="streetname" required [(ngModel)]=parentModel.apartment /></div>
+              <div class="col-md-3"><small class="text-danger" [class.d-none]="app.valid || app.untouched">Apartment is Required!</small></div>
             </div>
 
           <div class="row mt-4">
@@ -149,8 +155,8 @@
               <div class="col-md-3"><label class="form-label" for="Phone1">Phone</label></div>
               <div class="col-md-4"><input #pn1="ngModel" (blur)="validatePN1(pn1.value)" (change)="validatePN1(pn1.value)" [class.is-invalid]="pn1.invalid && pn1.touched && PN1HasError" class="form-control form-control-md" type="text" minlength="10" pattern="^[\+\d]?(?:[\d-.\s()]*)$" name="Phone1" placeholder="Phone" id="Phone1" required [(ngModel)]=parentModel.phone1 /></div>
               <div class="col-md-3"><select required  class="form-select" [class.is-invalid]="phone1type.invalid && phone1type.touched" style="font-size:13px;" #phone1type="ngModel" name="phonetype1" [(ngModel)]=parentModel.phone1type>
-                <option selected value="Home">Home</option>
-                <option  value="Cell">Cell</option>
+                <option selected value="1">Home</option>
+                <option  value="2">Cell</option>
                 </select></div>
                 <div class="col-md-2"><small class="text-danger" [class.d-none]="phone1type.valid || phone1type.untouched">Please choose a type!</small></div>
                 <div class="col-md-3"><small class="text-danger" [class.d-none]="pn1.valid || pn1.untouched ||!PN1HasError">Phone No# {{PN1ErrorMsg}}</small></div>
@@ -160,8 +166,8 @@
               <div class="col-md-3"><label class="form-label" for="Phone2">Phone</label></div>
               <div class="col-md-4"><input #pn2="ngModel" (blur)="validatePN2(pn2.value)" (change)="validatePN2(pn2.value)"  [class.is-invalid]="pn2.invalid && pn2.touched  && PN2HasError" class="form-control form-control-md" type="text" minlength="10" pattern="^[\+\d]?(?:[\d-.\s()]*)$" name="Phone2" placeholder="Phone" id="Phone2" required [(ngModel)]=parentModel.phone2 /></div>
               <div class="col-md-3"><select required class="form-select" [class.is-invalid]="phone2type.invalid && phone2type.touched" style="font-size:13px;" #phone2type="ngModel" name="phonetype2" [(ngModel)]=parentModel.phone2type>    
-                <option selected value="Home">Home</option>
-                <option  value="Cell">Cell</option>
+                <option selected value="1">Home</option>
+                <option  value="2">Cell</option>
                 </select></div>
                 <div class="col-md-2"><small class="text-danger" [class.d-none]="phone2type.valid || phone2type.untouched">Please choose a type!</small></div>
                 <div class="col-md-3"><small class="text-danger" [class.d-none]="pn2.valid || pn2.untouched ||!PN2HasError">Phone No# {{PN1ErrorMsg}}</small></div>
