@@ -11,7 +11,7 @@ import { ParentSectionComponent } from './parent-section.component';
 })
 export class ParentSectionService {
 
-  POSTURL="http://localhost:3000/"
+  POSTURL="http://35.165.88.243:8080/parent/insert-parent"
   GETURL=" "
 
   constructor(private _http: HttpClient) { }

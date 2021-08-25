@@ -276,9 +276,7 @@ emailErrorMsg =" "
 onSubmit(form:NgForm){
 
   this._PostDataService.PostReqest(this.parentModel).subscribe(
-    data=>{console.log("success!",data),
-
-    form.resetForm()
+    data=>{console.log("success!",data),form.resetForm()
   },
     error=> {this.errorStatus = error.status
 
