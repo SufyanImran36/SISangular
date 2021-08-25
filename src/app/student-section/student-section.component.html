@@ -96,8 +96,8 @@
 
             <div class="row mt-4">
               <div class="col-md-3"><label class="form-label" for="DOB">Date Of Birth</label></div>
-              <div class="col-md-5"><input #dateofBirth="ngModel" class="form-control form-control-md" [class.is-invalid]="dateofBirth.invalid && dateofBirth.touched" type="date" data-date-format="mm/dd/yyyy" required [(ngModel)]=studentModel.DateofBirth/></div>
-              <div class="col-md-3"><small class="text-danger" [class.d-none]="dateofBirth.valid || dateofBirth.untouched">DOB is required is Required!</small></div>
+              <div class="col-md-5"><input (input)="checkdate()" #dateofBirth="ngModel" class="form-control form-control-md" [class.is-invalid]="dateofBirth.invalid && dateofBirth.touched && isDatenull" type="date" data-date-format="mm-dd-yyyy" name="DOB" required [(ngModel)]=studentModel.DateofBirth/></div>
+              <div class="col-md-3"><small class="text-danger" [class.d-none]="dateofBirth.valid || dateofBirth.untouched || !isDatenull">DOB is required is Required!</small></div>
           </div>
   
           <div class="row mt-4">
@@ -215,6 +215,15 @@
             <div class="col-md-12"><a>Link will show what Academic year the Student is in</a></div>
           </div>
 
+          <div class="row mt-4">
+            <div class="col-md-3"><label class="form-label" for="FeePaid">Tuition and Fee paid</label></div>
+            <div class="col-md-5"><select required #feepaid="ngModel" class="form-select" style="font-size:13px;" name="FeePaid" id="FeePaid" [(ngModel)]=studentEnrollmentModel.paid>
+                <option selected value=true>Yes</option>
+                <option value=false>No</option>
+              </select></div>
+              <div class="col-md-2"><small class="text-danger" [class.d-none]="feepaid.valid || feepaid.untouched">Please an option!</small></div>
+        </div>
+
 
       
 
@@ -222,8 +231,8 @@
     
 
         <footer>
-          <button (click)="onReset(studentForm)" type="button" class="btn btn-success">Create New Student</button>
-          <button  [disabled]="studentForm.form.invalid || stateHasError || ssHasError" type="submit" class="btn btn-primary">Save Student</button>
+          <button (click)="onReset(studentForm)"  type="button" class="btn btn-success">Create New Student</button>
+          <button  [disabled]="studentForm.form.invalid || stateHasError || ssHasError || isDatenull" type="submit" class="btn btn-primary" >Save Student</button>
        </footer>
 
       </div>

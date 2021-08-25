@@ -74,7 +74,7 @@ export class StudentSectionComponent implements OnInit {
 
 
 //********************************************FIRST SECTION OF THE STUDENT FORM! -- PERSONAL INFORMATIOM********************************************
-  studentModel = new StudentData("","","","","","","State","","","Home","","Home","","None");
+  studentModel = new StudentData("","","",new Date("00-00-0000"),"","","State","","","Home","","Home","","None");
 
 
   
@@ -136,6 +136,16 @@ export class StudentSectionComponent implements OnInit {
   "WI",
   "WV",
   "WY"];
+
+  isDatenull = true;
+  checkdate(){
+    if(this.studentModel.DateofBirth == null)
+    {
+      this.isDatenull = true;
+    }else{
+      this.isDatenull = false;
+    }
+  }
 
 stateHasError = true; //BOOL CHECK!
   validateState(value: string){
@@ -251,6 +261,7 @@ InputFeeValue(value:string){
 
   if(value=="Standard Fee"){
     this.isOpenFee=false;
+    this.studentEnrollmentModel.tutionFee = "100";
     
   }
   else{
@@ -275,6 +286,8 @@ errorStatus = 0;
 emailErrorMsg =" "
 onSubmit(form:NgForm){
 
+  this.isDatenull = true;
+
 
   this._PostDataService.PostRequestEnrollmentInfo(this.studentEnrollmentModel).subscribe(
     data=>{console.log("succeess!",data)},
@@ -287,13 +300,13 @@ onSubmit(form:NgForm){
 
       if(this.errorStatus!=200){
         this.emailErrorMsg ="Email ID is Already Registered!"
-        setTimeout(()=>this.emailErrorMsg ="",1000)
+        setTimeout(()=>this.emailErrorMsg ="",5000)
        
         
       }
       else{
         form.resetForm();
-        this.studentModel = new StudentData("","","","","","","State","","","Home","","Home","","None");
+        this.studentModel = new StudentData("","","",new Date("00-00-0000"),"","","State","","","Home","","Home","","None");
         this.studentEnrollmentModel = new StudentEnrollment("","Select","","","false")
       }
     
@@ -309,8 +322,10 @@ onSubmit(form:NgForm){
 }//ENDS onSubmit FUNCTION
 
 onReset(form:NgForm){
+  this.emailErrorMsg =""
+  this.isDatenull = true;
   form.resetForm();
-  this.studentModel = new StudentData("","","","","","","State","","","","","","","None");
+  this.studentModel = new StudentData("","","",new Date("00-00-0000"),"","","State","","","","","","","None");
   this.studentEnrollmentModel = new StudentEnrollment("","Select","","","")
 }//END onReset FUNCITON --Resets the whole form when 'Create New Student is Clicked'
 

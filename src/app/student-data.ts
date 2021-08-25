@@ -5,7 +5,7 @@ export class StudentData {
         public fname: string,
         public mname: string,
         public lname: string, 
-        public DateofBirth:string,
+        public DateofBirth:Date,
         public address: string,
         public city: string,
         public state: string,
