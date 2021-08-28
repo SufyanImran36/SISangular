@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Ng2OrderModule } from 'ng2-order-pipe';
 
 import { NgxPaginationModule } from 'ngx-pagination';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 
@@ -27,6 +28,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AppComponent,
     ParentSectionComponent,
     StudentSectionComponent,
+    PageNotFoundComponent,
    
     
     // routingComponents ADD this to simplify list of all components, remove above component if your using this.
