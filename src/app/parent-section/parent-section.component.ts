@@ -13,10 +13,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 export class TableDataParent{
   constructor(
-    public fname:string,
-    public mname:string,
-    public lname:string,
-    public address:string,
+    public firstName:string,
+    public middleName:string,
+    public lastName:string,
+    public streetName:string,
+    public apartment:string,
     public phone1:string
     
   ){}
@@ -215,7 +216,7 @@ key3:string="phone1"
   "WY"];
 
 
-  parentModel = new ParentData("","","","","","","State","","","1","","1","","false");
+  parentModel = new ParentData("","","","","","","State","","","1","","1","");
 
   stateHasError = true;
 
@@ -286,11 +287,16 @@ onSubmit(form:NgForm){
        
         
       }
+
+      if(this.errorStatus!=200){
+       window.alert("Form Submission Failed!")
+      }
+
       else{
         this.emailErrorMsg ="";
         
         form.resetForm();
-        this.parentModel = new ParentData("","","","","","","State","","","","","","","false");
+        this.parentModel = new ParentData("","","","","","","State","","","","","","");
       
       }
     
@@ -306,7 +312,7 @@ onSubmit(form:NgForm){
 
 onReset(form:NgForm){
   form.resetForm();
-  this.parentModel = new ParentData("","","","","","","State","","","","","","","");
+  this.parentModel = new ParentData("","","","","","","State","","","","","","");
 }
 
 status1: boolean = false;

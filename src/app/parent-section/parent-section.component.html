@@ -49,7 +49,7 @@
                   <tbody>
                     <tr *ngFor="let TDP of TD | orderBy: key: reverse | orderBy: key2: reverse2 | orderBy: key3: reverse3 ">
                       <td>{{TDP.fname+" "+TDP.mname+" "+TDP.lname}}</td>
-                      <td>{{TDP.address}}</td>
+                      <td>{{TDP.streetName+" "+TDP.apartment}}</td>
                       <td>{{TDP.phone1}}</td>
                     </tr>
                     
@@ -83,19 +83,19 @@
           
          <div class="row">
               <div class="col-md-3"><label class="form-label" for="Firstname">First Name</label></div>
-              <div class="col-md-5"><input #fname="ngModel" [class.is-invalid]="fname.invalid && fname.touched" class="form-control form-control-md" type="text" name="Firstname" placeholder="First Name" id="Fname" required [(ngModel)]=parentModel.fname /></div>
+              <div class="col-md-5"><input #fname="ngModel" [class.is-invalid]="fname.invalid && fname.touched" class="form-control form-control-md" type="text" name="Firstname" placeholder="First Name" id="Fname" required [(ngModel)]=parentModel.firstName /></div>
               <div class="col-md-3"><small class="text-danger" [class.d-none]="fname.valid || fname.untouched">First Name is Required!</small></div>
             </div>
 
           <div class="row mt-4">
               <div class="col-md-3"><label class="form-label" for="Middlename">Middle Name</label></div>
-              <div class="col-md-5"><input #mname="ngModel" [class.is-invalid]="mname.invalid && mname.touched" class="form-control form-control-md" type="text" name="Middlename" placeholder="Middle Name" id="Mname" required [(ngModel)]=parentModel.mname /></div>
+              <div class="col-md-5"><input #mname="ngModel" [class.is-invalid]="mname.invalid && mname.touched" class="form-control form-control-md" type="text" name="Middlename" placeholder="Middle Name" id="Mname" required [(ngModel)]=parentModel.middleName /></div>
               <div class="col-md-3"><small class="text-danger" [class.d-none]="mname.valid || mname.untouched">Middle Name is Required!</small></div>
             </div>
 
           <div class="row mt-4">
               <div class="col-md-3"><label class="form-label" for="Lastname">Last Name</label></div>
-              <div class="col-md-5"><input #lname="ngModel" [class.is-invalid]="lname.invalid && lname.touched" class="form-control form-control-md" type="text" name="Lastname" placeholder="Last Name" id="Lname" required [(ngModel)]=parentModel.lname /></div>
+              <div class="col-md-5"><input #lname="ngModel" [class.is-invalid]="lname.invalid && lname.touched" class="form-control form-control-md" type="text" name="Lastname" placeholder="Last Name" id="Lname" required [(ngModel)]=parentModel.lastName /></div>
               <div class="col-md-3"><small class="text-danger" [class.d-none]="lname.valid || lname.untouched">Last Name is Required!</small></div>
             </div>
 
@@ -103,7 +103,7 @@
 
           <div class="row mt-4">
               <div class="col-md-3"><label class="form-label" for="Streetname">Street Name</label></div>
-              <div class="col-md-5"><input #streetname="ngModel" [class.is-invalid]="streetname.invalid && streetname.touched" class="form-control form-control-md" type="text" name="streetname" placeholder="Street Name" id="streetname" required [(ngModel)]=parentModel.street_name /></div>
+              <div class="col-md-5"><input #streetname="ngModel" [class.is-invalid]="streetname.invalid && streetname.touched" class="form-control form-control-md" type="text" name="streetname" placeholder="Street Name" id="streetname" required [(ngModel)]=parentModel.streetName /></div>
               <div class="col-md-3"><small class="text-danger" [class.d-none]="streetname.valid || streetname.untouched">Street Name is Required!</small></div>
             </div>
 
@@ -140,7 +140,7 @@
           <div class="row mt-4 ">
               <div class="col-md-3"><label class="form-label" for="Phone1">Phone</label></div>
               <div class="col-md-4"><input #pn1="ngModel" (blur)="validatePN1(pn1.value)" (change)="validatePN1(pn1.value)" [class.is-invalid]="pn1.invalid && pn1.touched && PN1HasError" class="form-control form-control-md" type="text" minlength="10" pattern="^[\+\d]?(?:[\d-.\s()]*)$" name="Phone1" placeholder="Phone" id="Phone1" required [(ngModel)]=parentModel.phone1 /></div>
-              <div class="col-md-3"><select required  class="form-select" [class.is-invalid]="phone1type.invalid && phone1type.touched" style="font-size:13px;" #phone1type="ngModel" name="phonetype1" [(ngModel)]=parentModel.phone1type>
+              <div class="col-md-3"><select required  class="form-select" [class.is-invalid]="phone1type.invalid && phone1type.touched" style="font-size:13px;" #phone1type="ngModel" name="phonetype1" [(ngModel)]=parentModel.phone1Type>
                 <option selected value="1">Home</option>
                 <option  value="2">Cell</option>
                 </select></div>
@@ -151,7 +151,7 @@
           <div class="row mt-4">
               <div class="col-md-3"><label class="form-label" for="Phone2">Phone</label></div>
               <div class="col-md-4"><input #pn2="ngModel" (blur)="validatePN2(pn2.value)" (change)="validatePN2(pn2.value)"  [class.is-invalid]="pn2.invalid && pn2.touched  && PN2HasError" class="form-control form-control-md" type="text" minlength="10" pattern="^[\+\d]?(?:[\d-.\s()]*)$" name="Phone2" placeholder="Phone" id="Phone2" required [(ngModel)]=parentModel.phone2 /></div>
-              <div class="col-md-3"><select required class="form-select" [class.is-invalid]="phone2type.invalid && phone2type.touched" style="font-size:13px;" #phone2type="ngModel" name="phonetype2" [(ngModel)]=parentModel.phone2type>    
+              <div class="col-md-3"><select required class="form-select" [class.is-invalid]="phone2type.invalid && phone2type.touched" style="font-size:13px;" #phone2type="ngModel" name="phonetype2" [(ngModel)]=parentModel.phone2Type>    
                 <option selected value="1">Home</option>
                 <option  value="2">Cell</option>
                 </select></div>
@@ -161,19 +161,19 @@
 
           <div class="row mt-4">
               <div class="col-md-3"><label class="form-label" for="Email">Email</label></div>
-              <div class="col-md-5"><input #email="ngModel" class="form-control form-control-md" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [class.is-invalid]="email.invalid && email.touched || !NotFound1" name="Email" placeholder="Email" id="Email" required [(ngModel)]=parentModel.email /></div>
+              <div class="col-md-5"><input #email="ngModel" class="form-control form-control-md" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [class.is-invalid]="email.invalid && email.touched || !NotFound1" name="Email" placeholder="Email" id="Email" required [(ngModel)]=parentModel.emailAddress /></div>
               <div class="col-md-3"><small class="text-danger" [class.d-none]="email.valid || email.untouched">Email is Required!</small><div class="text-danger">{{emailErrorMsg}}</div> 
           </div>
           </div>
 
-          <div class="row mt-4">
+          <!-- <div class="row mt-4">
               <div class="col-md-3"><label class="form-label" for="SMS">SMS Option</label></div>
               <div class="col-md-5"><select required #sms="ngModel" class="form-select" style="font-size:13px;" name="SMS" id="SMS" [(ngModel)]=parentModel.sms>
                   <option selected value=true>Yes</option>
                   <option value=false>No</option>
                 </select></div>
                 <div class="col-md-2"><small class="text-danger" [class.d-none]="sms.valid || sms.untouched">Please an option!</small></div>
-          </div>
+          </div> -->
 
           <footer>
              <button  (click)="onReset(parentForm)" class="btn btn-success">Create New Parent</button>

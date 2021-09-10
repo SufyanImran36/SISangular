@@ -16,6 +16,9 @@ import { Ng2OrderModule } from 'ng2-order-pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
+import { APP_BASE_HREF, LocationStrategy, HashLocationStrategy } from '@angular/common';
+
+
 
 
 
@@ -42,7 +45,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     Ng2OrderModule,
     NgxPaginationModule   
   ],
-  providers: [],
+  providers: [
+
+    { provide: APP_BASE_HREF, useValue: '/' },
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
+
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
